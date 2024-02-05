@@ -17,18 +17,27 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     card.classList.add("card");
     button.classList.add("closed");
     
-    name.textContent = `${fullName}, ID ${id}`;
+    if (card.classList.contains("selected")) {
+      name.textContent = `${fullName}, ID ${id}`;
+    } else {
+      name.textContent = fullName;
+    }
     contact.textContent = email;
-    button.textContent = mentors;
-    list.textContent = null;
+    button.textContent = `Mentors`;
+    list.textContent = mentors;
 
     card.addEventListener("click", () => {
       card.classList.toggle("selected");
+      if (card.classList.contains("selected")) {
+        name.textContent = `${fullName}, ID ${id}`;
+      } else {
+        name.textContent = fullName;
+      }
     })
     button.addEventListener("click", () => {
       button.classList.toggle("open");
     })
-
+    
     return card;
   }
   const endpointA = 'http://localhost:3003/api/learners'
