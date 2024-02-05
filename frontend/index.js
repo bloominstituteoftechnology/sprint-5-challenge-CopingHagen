@@ -1,8 +1,8 @@
 async function sprintChallenge5() { // Note the async keyword, in case you wish to use `await` inside sprintChallenge5
   // 👇 WORK WORK BELOW THIS LINE 👇
   const idCards = document.querySelector(".cards");
-  console.log(idCards);
-  function idCardMaker({ id, fullName, email, mentors}) {
+
+  function idCardMaker({ id, fullName, email, mentors }) {
     const card = document.createElement("div");
     idCards.appendChild(card);
 
@@ -17,33 +17,31 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     card.classList.add("card");
     button.classList.add("closed");
     
-    name.textContent = `${id}`;
+    name.textContent = `${fullName}, ID ${id}`;
     contact.textContent = email;
     button.textContent = mentors;
-    list.textContent = fullName;
-    
+    list.textContent = null;
 
     card.addEventListener("click", () => {
-      card.classList.toggle("card selected");
+      card.classList.toggle("selected");
     })
     button.addEventListener("click", () => {
       button.classList.toggle("open");
     })
-    
-    return idCards;
+
+    return card;
   }
   const endpointA = 'http://localhost:3003/api/learners'
-  axios.get(endpointA)
-    .then(response => {
-      const card = idCardMaker({ id: response.data.fullName, email, mentors});
-      idCards.appendChild(card);
-    });
   const endpointB = 'http://localhost:3003/api/mentors'
-  axios.get(endpointB)
-    .then(response => {
+  axios.get(endpointA)
+    .then(res => {
+      res.data.forEach(learner => {
+        const card = idCardMaker(learner);
+        idCards.appendChild(card);
+      });
+    })
+    .catch(error => console.log("Error fetching learner data:", error));
 
-      console.log(response.data);
-    });
 
   const footer = document.querySelector('footer')
   const currentYear = new Date().getFullYear()
