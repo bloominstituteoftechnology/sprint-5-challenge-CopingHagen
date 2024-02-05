@@ -28,7 +28,6 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
 
     card.addEventListener("click", (event) => {
       if (card.classList.contains("selected") && event.target === button) {
-        
       } else {
         card.classList.toggle("selected");
       }
@@ -41,11 +40,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     button.addEventListener("click", () => {
       button.classList.toggle("open");
     })
-    // if (card.classList.contains("selected")) {
-    //     name.textContent = `${fullName}, ID ${id}`;
-    //   } else {
-    //     name.textContent = fullName;
-    //   }
+
     return card;
   }
   const endpointA = 'http://localhost:3003/api/learners'
