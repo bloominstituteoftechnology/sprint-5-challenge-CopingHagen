@@ -32,12 +32,20 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
       } else {
         card.classList.toggle("selected");
       }
-    });
-    
+      if (card.classList.contains("selected")) {
+        name.textContent = `${fullName}, ID ${id}`;
+      } else {
+        name.textContent = fullName;
+      }
+    });  
     button.addEventListener("click", () => {
       button.classList.toggle("open");
     })
-    
+    // if (card.classList.contains("selected")) {
+    //     name.textContent = `${fullName}, ID ${id}`;
+    //   } else {
+    //     name.textContent = fullName;
+    //   }
     return card;
   }
   const endpointA = 'http://localhost:3003/api/learners'
