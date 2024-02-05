@@ -26,14 +26,14 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     button.textContent = `Mentors`;
     list.textContent = mentors;
 
-    card.addEventListener("click", () => {
-      card.classList.toggle("selected");
-      if (card.classList.contains("selected")) {
-        name.textContent = `${fullName}, ID ${id}`;
+    card.addEventListener("click", (event) => {
+      if (card.classList.contains("selected") && event.target === button) {
+        
       } else {
-        name.textContent = fullName;
+        card.classList.toggle("selected");
       }
-    })
+    });
+    
     button.addEventListener("click", () => {
       button.classList.toggle("open");
     })
