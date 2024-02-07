@@ -31,6 +31,10 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     });
 
     card.addEventListener("click", (event) => {
+      // const allCards = document.querySelectorAll('.card');
+      // allCards.forEach(card => {
+      //   card.classList.remove('selected');
+      // })
       if (card.classList.contains("selected") && event.target === button) {
       } else {
         card.classList.toggle("selected");
