@@ -16,7 +16,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     card.appendChild(list);
     card.classList.add("card");
     button.classList.add("closed");
-    
+
     if (card.classList.contains("selected")) {
       name.textContent = `${fullName}, ID ${id}`;
     } else {
@@ -24,7 +24,11 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     }
     contact.textContent = email;
     button.textContent = `Mentors`;
-    list.textContent = mentors;
+    mentors.forEach(mentorID => {
+      const mentorItem = document.createElement("li");
+      mentorItem.textContent = mentorID;
+      list.appendChild(mentorItem);
+    });
 
     card.addEventListener("click", (event) => {
       if (card.classList.contains("selected") && event.target === button) {
@@ -38,22 +42,30 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
       }
     });  
     button.addEventListener("click", () => {
+      button.classList.toggle("closed");
       button.classList.toggle("open");
     })
 
     return card;
   }
+
   const endpointA = 'http://localhost:3003/api/learners'
   const endpointB = 'http://localhost:3003/api/mentors'
   axios.get(endpointA)
     .then(res => {
       res.data.forEach(learner => {
-        const card = idCardMaker(learner);
-        idCards.appendChild(card);
-      });
-    })
-    .catch(error => console.log("Error fetching learner data:", error));
-
+        axios.get(endpointB)
+        .then(response => {
+          const mentorsNames = response.data.filter(mentor => learner.mentors.includes(mentor.id))
+            .map(mentor => `${mentor.firstName} ${mentor.lastName}`);
+          learner.mentors = mentorsNames;
+          const card = idCardMaker(learner);
+          idCards.appendChild(card);
+      })
+      .catch(error => console.error("Error fetching mentors data:", error));
+    });
+  })  
+  .catch(error => console.log("Error fetching learner data:", error));
 
   const footer = document.querySelector('footer')
   const currentYear = new Date().getFullYear()
