@@ -10,6 +10,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     const contact = document.createElement("div");
     const button = document.createElement("h4");
     const list = document.createElement("ul");
+    const info = document.querySelector(".info");
     card.appendChild(name);
     card.appendChild(contact);
     card.appendChild(button);
@@ -19,8 +20,10 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
 
     if (card.classList.contains("selected")) {
       name.textContent = `${fullName}, ID ${id}`;
+      info.textContent = `The selected learner is ${fullName}`;
     } else {
       name.textContent = fullName;
+      info.textContent = 'No learner is selected'
     }
     contact.textContent = email;
     button.textContent = `Mentors`;
@@ -36,9 +39,10 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
       allCards.forEach(cardElement => {
         if (cardElement !== card) {
           cardElement.classList.remove('selected');
+          name.textContent = fullName;
         }
       });
-
+    
       if (card.classList.contains("selected") && event.target === button) {
       } else {
         card.classList.toggle("selected");
@@ -47,7 +51,6 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
         name.textContent = `${fullName}, ID ${id}`;
         info.textContent = `The selected learner is ${fullName}`;
       } else {
-        name.textContent = fullName;
         info.textContent = 'No learner is selected'
       }
     });  
@@ -77,8 +80,6 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
     });
   })  
   .catch(error => console.log("Error fetching learner data:", error));
-  
-  
 
   const footer = document.querySelector('footer')
   const currentYear = new Date().getFullYear()
