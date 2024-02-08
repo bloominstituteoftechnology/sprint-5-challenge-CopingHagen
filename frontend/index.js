@@ -41,31 +41,21 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
         if (cardElement !== card) {
           cardElement.classList.remove('selected');
           cardElement.querySelector('h3').textContent = cardElement.getAttribute('data-fullName');
-          // name.textContent = fullName;
         }
       });
       if (card.classList.contains("selected") && event.target === button) {
       } else {
         card.classList.toggle("selected");
       }
-      // card.classList.toggle("selected");
     
       if (card.classList.contains("selected")) {
         name.textContent = `${fullName}, ID ${id}`;
         info.textContent = `The selected learner is ${fullName}`;
       } else {
+        name.textContent = fullName;
         info.textContent = 'No learner is selected'
       }
-      // if (card.classList.contains("selected") && event.target === button) {
-      // } else {
-      //   card.classList.toggle("selected");
-      // }
-      // if (card.classList.contains("selected")) {
-      //   name.textContent = `${fullName}, ID ${id}`;
-      //   info.textContent = `The selected learner is ${fullName}`;
-      // } else {
-      //   info.textContent = 'No learner is selected'
-      // }
+      
     });  
     button.addEventListener("click", () => {
       button.classList.toggle("closed");
