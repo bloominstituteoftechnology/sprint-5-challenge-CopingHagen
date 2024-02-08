@@ -32,6 +32,7 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
 
     card.addEventListener("click", (event) => {
       const allCards = document.querySelectorAll('.card');
+      const info = document.querySelector(".info");
       allCards.forEach(cardElement => {
         if (cardElement !== card) {
           cardElement.classList.remove('selected');
@@ -44,15 +45,16 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
       }
       if (card.classList.contains("selected")) {
         name.textContent = `${fullName}, ID ${id}`;
+        info.textContent = `The selected learner is ${fullName}`;
       } else {
         name.textContent = fullName;
+        info.textContent = 'No learner is selected'
       }
     });  
     button.addEventListener("click", () => {
       button.classList.toggle("closed");
       button.classList.toggle("open");
     })
-
     return card;
   }
 
@@ -76,6 +78,8 @@ async function sprintChallenge5() { // Note the async keyword, in case you wish 
   })  
   .catch(error => console.log("Error fetching learner data:", error));
   
+  
+
   const footer = document.querySelector('footer')
   const currentYear = new Date().getFullYear()
   footer.textContent = `© BLOOM INSTITUTE OF TECHNOLOGY ${currentYear}`
